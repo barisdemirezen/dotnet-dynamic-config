@@ -1,0 +1,29 @@
+﻿@model Parameter;
+@using Publisher.Data
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="">
+    <h1>EDITING FOR ID @Model.Id</h1>
+    <form asp-controller="Home" asp-action="UpdateData" method="post">
+        <input asp-for="Id" value="@Model.Id" type="hidden" />
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Key</label>
+            <input asp-for="Key" value="@Model.Key" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Value</label>
+            <input asp-for="Value" value="@Model.Value" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Environment</label>
+            <input asp-for="Environment" value="@Model.Environment" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Application Name</label>
+            <input asp-for="ApplicationName" value="@Model.ApplicationName" class="form-control" />
+        </div>
+        <button class="btn btn-success" type="submit">KAYDET</button>
+    </form>
+</div>

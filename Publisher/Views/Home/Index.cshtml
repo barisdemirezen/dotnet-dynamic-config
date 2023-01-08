@@ -1,0 +1,31 @@
+﻿@model List<Parameter>;
+@using Publisher.Data
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ApplicationName</th>
+                <th scope="col">Environment</th>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ApplicationName</td>
+                    <td>@item.Environment</td>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                    <td><a href="/@item.Id">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
