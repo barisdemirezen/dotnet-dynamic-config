@@ -19,19 +19,19 @@ namespace Subscriber.Configuration
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            string applicationName = _conf.GetValue<string>("ApplicationName");
+            string applicationName = _conf.GetValue<string>("DynamicConfig:ApplicationName");
             string environment = _env.EnvironmentName;
 
             using (HttpClient client = new())
             {
                 {
-                    var data = client.GetStringAsync($"https://localhost:7080/api?ApplicationName={applicationName}&Environment={environment}").Result;
-                    var parameters = JsonConvert.DeserializeObject<List<ParameterResponseModel>>(data);
+                    var data = client.GetStringAsync($"https://localhost:7018/application/{applicationName}/environment/{environment}").Result;
+                    var parameters = JsonConvert.DeserializeObject<ParameterResponseModel>(data);
 
-                    if (parameters == null || parameters.Count == 0)
+                    if (parameters == null || parameters.Data.Parameters.Count == 0)
                         return Task.CompletedTask;
 
-                    foreach (var parameter in parameters)
+                    foreach (var parameter in parameters.Data.Parameters)
                         _memory.Set(parameter.Key, parameter.Value);
 
                 }
